@@ -1,26 +1,58 @@
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+
+const LOCAL_STOARGE_KEY = "react-todo-list-todos"
 
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const storageTodos = JSON.parse(localStorage.getItem(LOCAL_STOARGE_KEY));
+    if (storageTodos) {
+      setTodos(storageTodos);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (todos.length > 0) { //solves local storage issue
+      localStorage.setItem(LOCAL_STOARGE_KEY, JSON.stringify(todos));
+    }
+  }, [todos]);
+
+  function addTodo(todo) {
+    setTodos([todo, ...todos]);
+  }
+
+  function toggleComplete(id) {
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        return todo;
+      })
+    );
+  }
+
+  function removeTodo(id) {
+    setTodos(todos.filter(todo => todo.id !== id));
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
+        <p>React Todo</p>
+        <TodoForm addTodo={addTodo} />
+        <TodoList 
+          todos={todos} 
+          toggleComplete={toggleComplete}
+          removeTodo={removeTodo}
+         />
       </header>
     </div>
   );
