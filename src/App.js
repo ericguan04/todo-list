@@ -9,6 +9,7 @@ const LOCAL_STOARGE_KEY = "react-todo-list-todos"
 function App() {
   const [todos, setTodos] = useState([]);
 
+  //basic way to save todo items upon reloading the page
   useEffect(() => {
     const storageTodos = JSON.parse(localStorage.getItem(LOCAL_STOARGE_KEY));
     if (storageTodos) {
@@ -16,8 +17,9 @@ function App() {
     }
   }, []);
 
+  //todos.length > 0 makes sure that at least one todo item is present before saving
   useEffect(() => {
-    if (todos.length > 0) { //solves local storage issue
+    if (todos.length > 0) { //solves issue that returns an empty array upon reloading page
       localStorage.setItem(LOCAL_STOARGE_KEY, JSON.stringify(todos));
     }
   }, [todos]);
