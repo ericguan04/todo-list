@@ -1,3 +1,5 @@
+//Todo.js manages the "todos" after you click submit
+
 import React from "react";
 import { Close } from "@mui/icons-material";
 import { ListItem, Typography, IconButton, Checkbox } from "@mui/material";
