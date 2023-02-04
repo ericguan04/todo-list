@@ -1,4 +1,4 @@
-//Todo.js manages the "todos" after you click submit
+//Todo.js manages the "tasks" after you "submit" is clicked
 
 import React from "react";
 import { Close } from "@mui/icons-material";
