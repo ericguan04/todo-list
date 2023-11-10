@@ -1,4 +1,5 @@
 ### [Link to To-Do List Application](https://wonderful-beach-0cbb32e10.2.azurestaticapps.net/)
+Project has been taken off the cloud for the time being
 
 Front-end web application using ReactJS hosted on Microsoft Azure’s Static Web Apps Service
 
